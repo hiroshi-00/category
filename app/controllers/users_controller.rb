@@ -31,6 +31,7 @@ class UsersController < ApplicationController
 
   # POST /users or /users.json
   def create
+    
     @user = User.new(user_params)
 
     respond_to do |format|
@@ -74,7 +75,7 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, prefecture_ids: [], user_prefectures_attributes: [:id, :user_id, :prefecture_id])
+      params.require(:user).permit(:name, prefecture_ids: [], user_prefectures_attributes: [:id, :user_id, :birthplace_id, :current_location_id])
     end
     
     def search_prefecture(prefectures)

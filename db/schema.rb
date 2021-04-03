@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_03_043402) do
+ActiveRecord::Schema.define(version: 2021_04_03_091413) do
 
   create_table "prefectures", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "user_prefectures", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "prefecture_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["prefecture_id"], name: "index_user_prefectures_on_prefecture_id"
+    t.integer "birthplace_id"
+    t.integer "current_location_id"
     t.index ["user_id"], name: "index_user_prefectures_on_user_id"
   end
 

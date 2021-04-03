@@ -1,0 +1,41 @@
+<!--<!=============================================>-->
+<div class="btn btn-primary" data-toggle="modal" data-target="#category-modal">選択</div>
+<div class="modal fade" id="category-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h5>選択</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class = "modal-body text-center">
+      
+      <%= form_with url: users_path, local: true, method: "get" do |f| %>
+        
+        <div class="form-group">
+          
+          <%= f.collection_check_boxes :prefecture_ids, Prefecture.all, :id, :name do |b| %>
+            <%= b.label(class: "form-check-label m-3") do %>
+              
+                <%= b.check_box(class: "form-check-input ") %>
+                <div class="btn btn-secondary" >
+                  <%= b.text %>
+                </div>
+              
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit "検索", class: "btn btn-primary"%>
+      <% end %>
+      </div>
+        
+    </div>
+  </div>
+</div>
+
+<!--=================================================-->
