@@ -3,12 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    if  params[:prefecture_ids]
-      params[:prefecture_ids].delete_at(0)
-      search_prefecture(params[:prefecture_ids])
-    else
-      @users = User.all
-    end
+    @users = User.all
   end
 
   # GET /users/1 or /users/1.json
@@ -76,14 +71,6 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:name, prefecture_ids: [], user_prefectures_attributes: [:id, :user_id, :birthplace_id, :current_location_id])
-    end
-    
-    def search_prefecture(prefectures)
-        selected_prefecture = []
-        UserPrefecture.where(prefecture_id: prefectures).each do |user_prefecture|
-          selected_prefecture << user_prefecture.user_id
-        end
-        @users = User.where(id: selected_prefecture.uniq)
     end
     
 end
