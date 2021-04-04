@@ -7,7 +7,6 @@
     <tr>
       <th>Name</th>
       <th>出身地</th>
-      <th>現在地</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,8 +15,12 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.name, user %></td>
-        <% (user.user_prefectures).each do |prefectures| %>
-          <td><%= prefectures.birthplace_id %></td>
+        <% if user.user_prefectures.present? %>
+          <% (user.user_prefectures).each do |prefectures| %>
+            <td><%= prefectures.prefecture.name %></td>
+          <% end %>
+        <% else %>
+          <td>未登録</td>
         <% end %>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>

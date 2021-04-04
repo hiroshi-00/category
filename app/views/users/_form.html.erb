@@ -19,16 +19,10 @@
   <%= f.fields_for :user_prefectures do |e| %>
     <div class="form-group">
       <%= e.label "出身地" %>
-      <%= e.collection_select :birthplace_id, @prefectures, :id, :name, { prompt: "選択してください" } , class: 'form-control' %>
+      <%= e.collection_select :prefecture_id, Prefecture.all, :id, :name, { prompt: "選択してください" } , class: 'form-control' %>
     </div>
   <% end %>
-  
-  <%= f.fields_for :user_prefectures do |d| %>
-    <div class="form-group">
-      <%= d.label "現在地" %>
-      <%= d.collection_select :current_location_id, @prefectures, :id, :name, { prompt: "選択してください" } , class: 'form-control' %>
-    </div>
-  <% end %>
+
 
   <div class="actions">
     <%= f.submit %>

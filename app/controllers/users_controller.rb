@@ -3,7 +3,12 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    if  params[:prefecture_ids]
+      params[:prefecture_ids].delete_at(0)
+      search_prefecture(params[:prefecture_ids])
+    else
+      @users = User.all
+    end
   end
 
   # GET /users/1 or /users/1.json
@@ -15,18 +20,14 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @prefecture = @user.user_prefectures.build
-    @prefectures = Prefecture.all
-   
   end
 
   # GET /users/1/edit
   def edit
-    @prefectures = Prefecture.all
   end
 
   # POST /users or /users.json
   def create
-    
     @user = User.new(user_params)
 
     respond_to do |format|
@@ -70,7 +71,15 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, prefecture_ids: [], user_prefectures_attributes: [:id, :user_id, :birthplace_id, :current_location_id])
+      params.require(:user).permit(:name, prefecture_ids: [], user_prefectures_attributes: [:id, :user_id, :prefecture_id])
+    end
+    
+    def search_prefecture(prefectures)
+        selected_prefecture = []
+        UserPrefecture.where(prefecture_id: prefectures).each do |user_prefecture|
+          selected_prefecture << user_prefecture.user_id
+        end
+        @users = User.where(id: selected_prefecture.uniq)
     end
     
 end

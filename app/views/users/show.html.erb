@@ -9,8 +9,12 @@
 
 <p>
   <strong>出身地:</strong>
-  <% @prefectures.each do |prefectures| %>
-      <%= prefectures.prefecture.name %>
+  <% if @prefectures.present? %>
+    <% @prefectures.each do |prefectures| %>
+        <%= prefectures.prefecture.name %>
+    <% end %>
+  <% else %>
+    <td>未登録</td>
   <% end %>
 </p>
 

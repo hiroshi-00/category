@@ -8,5 +8,5 @@ prefectures = [
 
 
 prefectures.each_with_index do |prefecture, i|
-  Prefecture.create(id: i+1 , name: prefecture)
+  Prefecture.create(id: i+1, name: prefecture)
 end
